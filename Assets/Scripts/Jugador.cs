@@ -8,6 +8,10 @@ public class Jugador : MonoBehaviour
     public GameObject gun, bulletPrefab;
     public static int SCORE = 0;
     private Rigidbody _rigid;
+    public float leftLimit = -16f;
+    public float rightLimit = 16f;
+    public float topLimit = 14f;
+    public float bottomLimit = -14f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,6 +37,39 @@ public class Jugador : MonoBehaviour
             balaScript.targetVector = transform.right;
         }
 
+        if (transform.position.x > rightLimit)
+        {
+            transform.position = new Vector3(
+                leftLimit,
+                transform.position.y,
+                transform.position.z
+            );
+        }
+        else if (transform.position.x < leftLimit)
+        {
+            transform.position = new Vector3(
+                rightLimit,
+                transform.position.y,
+                transform.position.z
+            );
+        }
+
+        if (transform.position.y > topLimit)
+        {
+            transform.position = new Vector3(
+                transform.position.x,
+                bottomLimit,
+                transform.position.z
+            );
+        }
+        else if (transform.position.y < bottomLimit)
+        {
+            transform.position = new Vector3(
+                transform.position.x,
+                topLimit,
+                transform.position.z
+            );
+        }
     }
 
 
